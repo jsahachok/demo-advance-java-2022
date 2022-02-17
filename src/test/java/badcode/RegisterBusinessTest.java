@@ -34,9 +34,9 @@ public class RegisterBusinessTest {
     public void case03() {
         RegisterBusiness business = new RegisterBusiness();
         Speaker speaker = new Speaker();
+        speaker.setFirstName("Sahachok");
 
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            speaker.setFirstName("Sahachok");
             business.register(null,speaker);
         });
         assertEquals("Last name is required.", exception.getMessage());
@@ -48,11 +48,27 @@ public class RegisterBusinessTest {
     public void case04() {
         RegisterBusiness business = new RegisterBusiness();
         Speaker speaker = new Speaker();
+        speaker.setFirstName("Sahachok");
+        speaker.setLastName("Jaratsaengsophon");
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            speaker.setFirstName("Sahachok");
-            speaker.setLastName("Jaratsaengsophon");
             business.register(null,speaker);
         });
         assertEquals("Email is required.", exception.getMessage());
     }
+
+    @Test
+    @DisplayName("ระบุ FirstName = Sahachok Lastname = Jaratsaengsophon Email = sahachok.j  จะโดน ArgumentNullException กลับมา " +
+            "พร้อมกับ message Email domain invalid.")
+    public void case05() {
+        RegisterBusiness business = new RegisterBusiness();
+        Speaker speaker = new Speaker();
+        speaker.setFirstName("Sahachok");
+        speaker.setLastName("Jaratsaengsophon");
+        speaker.setEmail("sahachok.j");
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            business.register(null,speaker);
+        });
+        assertEquals("Email domain invalid.", exception.getMessage());
+    }
+
 }
