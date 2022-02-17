@@ -9,10 +9,8 @@ public class RegisterBusinessTest {
 
     @Test
     @DisplayName("ข้อมูล speaker = null จะโดน runtime exception กลับมา " + "พร้อมกับ message Speaker is null")
-    public void register() {
+    public void case01() {
         RegisterBusiness business = new RegisterBusiness();
-
-
         Exception exception = assertThrows(RuntimeException.class, () -> {
             business.register(null,null);
         });
@@ -21,10 +19,12 @@ public class RegisterBusinessTest {
     }
 
     @Test
-    public void getFee() {
-    }
-
-    @Test
-    public void getEmailDomain() {
+    @DisplayName("ข้อมูล Firstname = null จะโดน ArgumentNullException กลับมา " + "พร้อมกับ message First name is required.")
+    public void case02() {
+        RegisterBusiness business = new RegisterBusiness();
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            business.register(null,new Speaker());
+        });
+        assertEquals("First name is required.", exception.getMessage());
     }
 }
