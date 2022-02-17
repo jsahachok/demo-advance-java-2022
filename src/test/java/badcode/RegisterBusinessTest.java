@@ -19,7 +19,8 @@ public class RegisterBusinessTest {
     }
 
     @Test
-    @DisplayName("ข้อมูล Firstname = null จะโดน ArgumentNullException กลับมา " + "พร้อมกับ message First name is required.")
+//    @DisplayName("ข้อมูล Firstname = null จะโดน ArgumentNullException กลับมา " + "พร้อมกับ message First name is required.")
+    @DisplayName("First name is required.")
     public void case02() {
         RegisterBusiness business = new RegisterBusiness();
         Exception exception = assertThrows(RuntimeException.class, () -> {
@@ -29,8 +30,9 @@ public class RegisterBusinessTest {
     }
 
     @Test
-    @DisplayName("ระบุ FirstName = Sahachok แต่ Lastname = null จะโดน ArgumentNullException กลับมา " +
-            "พร้อมกับ message Last name is required.")
+//    @DisplayName("ระบุ FirstName = Sahachok แต่ Lastname = null จะโดน ArgumentNullException กลับมา " +
+//            "พร้อมกับ message Last name is required.")
+    @DisplayName("Last name is required.")
     public void case03() {
         RegisterBusiness business = new RegisterBusiness();
         Speaker speaker = new Speaker();
@@ -43,8 +45,9 @@ public class RegisterBusinessTest {
     }
 
     @Test
-    @DisplayName("ระบุ FirstName = Sahachok Lastname = Jaratsaengsophon แต่ไม่ระบุ Email จะโดน ArgumentNullException กลับมา " +
-            "พร้อมกับ message Email is required.")
+//    @DisplayName("ระบุ FirstName = Sahachok Lastname = Jaratsaengsophon แต่ไม่ระบุ Email จะโดน ArgumentNullException กลับมา " +
+//            "พร้อมกับ message Email is required.")
+    @DisplayName("Email is required.")
     public void case04() {
         RegisterBusiness business = new RegisterBusiness();
         Speaker speaker = new Speaker();
@@ -57,8 +60,9 @@ public class RegisterBusinessTest {
     }
 
     @Test
-    @DisplayName("ระบุ FirstName = Sahachok Lastname = Jaratsaengsophon Email = sahachok.j  จะโดน ArgumentNullException กลับมา " +
-            "พร้อมกับ message Email domain invalid.")
+//    @DisplayName("ระบุ FirstName = Sahachok Lastname = Jaratsaengsophon Email = sahachok.j  จะโดน ArgumentNullException กลับมา " +
+//            "พร้อมกับ message Email domain invalid.")
+    @DisplayName("Email domain invalid.")
     public void case05() {
         RegisterBusiness business = new RegisterBusiness();
         Speaker speaker = new Speaker();
@@ -69,6 +73,21 @@ public class RegisterBusinessTest {
             business.register(null,speaker);
         });
         assertEquals("Email domain invalid.", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Email domain invalid.")
+    public void case06() {
+        RegisterBusiness business = new RegisterBusiness();
+        Speaker speaker = new Speaker();
+        speaker.setFirstName("Sahachok");
+        speaker.setLastName("Jaratsaengsophon");
+        speaker.setEmail("sahachok.j@gmail.com");
+        business.register(null,speaker);
+//        Exception exception = assertThrows(RuntimeException.class, () -> {
+//            business.register(null,speaker);
+//        });
+//        assertEquals("Email domain invalid.", exception.getMessage());
     }
 
 }
