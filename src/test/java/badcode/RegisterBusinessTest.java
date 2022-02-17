@@ -41,4 +41,18 @@ public class RegisterBusinessTest {
         });
         assertEquals("Last name is required.", exception.getMessage());
     }
+
+    @Test
+    @DisplayName("ระบุ FirstName = Sahachok Lastname = Jaratsaengsophon แต่ไม่ระบุ Email จะโดน ArgumentNullException กลับมา " +
+            "พร้อมกับ message Email is required.")
+    public void case04() {
+        RegisterBusiness business = new RegisterBusiness();
+        Speaker speaker = new Speaker();
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            speaker.setFirstName("Sahachok");
+            speaker.setLastName("Jaratsaengsophon");
+            business.register(null,speaker);
+        });
+        assertEquals("Email is required.", exception.getMessage());
+    }
 }
