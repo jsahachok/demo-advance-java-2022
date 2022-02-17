@@ -6,8 +6,24 @@ public class RegisterBusiness {
 
     public Integer register(SpeakerRepository repository, Speaker speaker) {
         Integer speakerId;
+        validationSpeaker(speaker);
+
+        //Register Speaker
+        int exp = speaker.getExp();
+        speaker.setRegistrationFee(getFee(exp));
+        try {
+            speakerId = repository.saveSpeaker(speaker);
+        } catch (Exception exception) {
+            throw new SaveSpeakerException("Can't save a speaker.");
+        }
+
+        return speakerId;
+    }
+
+    private void validationSpeaker(Speaker speaker) {
         String[] domains = {"gmail.com", "live.com"};
 
+        //Failure
         if(speaker == null){
             throw new RuntimeException("Speaker is null");
         }
@@ -25,16 +41,6 @@ public class RegisterBusiness {
         if (Arrays.stream(domains).filter(it -> it.equals(emailDomain)).count() != 1) {
             throw new SpeakerDoesntMeetRequirementsException("Speaker doesn't meet our standard rules.");
         }
-
-        int exp = speaker.getExp();
-        speaker.setRegistrationFee(getFee(exp));
-        try {
-            speakerId = repository.saveSpeaker(speaker);
-        } catch (Exception exception) {
-            throw new SaveSpeakerException("Can't save a speaker.");
-        }
-
-        return speakerId;
     }
 
     int getFee(int experienceYear) {
