@@ -41,5 +41,4 @@ public class RegisterBusiness {
         }
         return fee;
     }
-
 }
