@@ -8,12 +8,15 @@ public class DemoSrp {
                 System.out.println("Not real, for testing");
             }
         };
-        // Depednency Injection
+        // Dependency Injection
         // 1. Constructor Injection
+        // required dependency ของ class นั้นๆ
         OrderBusiness orderBusiness = new OrderBusiness(paymentService);
         // 2. Setter Injection
+        // optional ใช้ได้ตามความจำเป็น >> มักจะถูกเลือกใช้มากกว่า
         // orderBusiness.setPaymentService(paymentService);
         // 3. Method Injection
+        // เฉพาะ method ที่ใช้ >> ไม่ค่อยได้ใช้ >> ควรส่งแค่ Param มากกว่า
         //orderBusiness.process(paymentService);
         // 4. Interface Injection
         orderBusiness.process();
