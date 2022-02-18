@@ -15,8 +15,10 @@ package register;
      * @param id
      * @return
      */
-    public String compute(int id) {
+    public String compute(int id, ModelA a) {
         return "Result = " + db.increaseOne(id);
+//      return "Result = " + db.increaseOne(id) + db.increaseOne(id);
+//      return ""
     }
 
 }
@@ -27,6 +29,10 @@ package register;
 //        throw new RuntimeException("Under construction");
 //    }
 //}
+
+class ModelA{
+
+}
 
 interface DB {
     int increaseOne(int id);
