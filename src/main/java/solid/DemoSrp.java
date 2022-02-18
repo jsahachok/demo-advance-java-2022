@@ -12,7 +12,7 @@ public class DemoSrp {
         // 1. Constructor Injection
         // required dependency ของ class นั้นๆ
         OrderBusiness orderBusiness = new OrderBusiness(paymentService);
-        // 2. Setter Injection
+        // 2. Setter/Field Injection
         // optional ใช้ได้ตามความจำเป็น >> มักจะถูกเลือกใช้มากกว่า
         // orderBusiness.setPaymentService(paymentService);
         // 3. Method Injection
